@@ -33,14 +33,14 @@ def run_game():
 
     # start game cycle
     while True:
-        gf.check_events(ship, ai_settings, screen, bullets)
+        gf.check_events(ship, ai_settings, screen, bullets, stats, play_button)
         if stats.game_active:
             ship.update()
             gf.update_bullets(ai_settings, screen,  ship, bullets, aliens)
         # gf.create_fleet(ai_settings, screen, aliens, ship)
             gf.update_aliens(ai_settings, stats, screen, ship, aliens, bullets)
-        else:
-            print("game over")
+        # else:
+        #     print("game over")
         # 用背景色填充屏幕
         # 每次循环都重绘屏幕
         gf.update_screen(ai_settings, screen, ship, bullets, aliens, play_button, stats)

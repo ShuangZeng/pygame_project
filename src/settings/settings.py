@@ -15,7 +15,7 @@ class Settings():
         self.bullet_width = 3
         self.bullet_height = 15
         self.bullet_color = 60, 60, 60
-        self.alien_speed_factor = 3
+        self.alien_speed_factor = 10
         # 有外星人撞到边缘时下移的速度
         self.fleet_drop_seed = 10
         self.fleet_direction = 1

@@ -27,7 +27,7 @@ def check_keyup_events(event, ship):
         ship.moving_left = False
 
 
-def check_events(ship, ai_settings, screen, bullets):
+def check_events(ship, ai_settings, screen, bullets, stats, play_button):
     # 响应按键和鼠标事件
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -36,6 +36,13 @@ def check_events(ship, ai_settings, screen, bullets):
             check_keydown_events(event, ship, ai_settings, screen, bullets)
         elif event.type == pygame.KEYUP:
             check_keyup_events(event, ship)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_play_button(stats, play_button, mouse_x, mouse_y)
+
+def check_play_button(stats, play_button, mouse_x, mouse_y):
+    if play_button.rect.collidepoint(mouse_x, mouse_y):
+        stats.game_active = True
 
 
 def update_bullets(ai_settings, screen, ship, bullets, aliens):
@@ -123,9 +130,10 @@ def change_fleet_direction(ai_settings, aliens):
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     #     响应撞到的飞船
-
-    if stats.ships_left > 0:
-        stats.ships_left -= -1
+    print(stats.ships_left)
+    # 从0到3，要想限制3个飞船，不能遍历到0的位置
+    if stats.ships_left > 1:
+        stats.ships_left -= 1
     # 清空外星人列表和子弹列表
         aliens.empty()
         bullets.empty()
@@ -134,7 +142,7 @@ def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
         create_fleet(ai_settings, screen, aliens, ship)
         ship.center_ship()
         sleep(0.5)
-
+        print(stats.ships_left)
     else:
         stats.game_active = False
 
