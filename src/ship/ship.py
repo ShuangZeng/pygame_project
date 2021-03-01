@@ -1,10 +1,12 @@
 #管理飞船行为
 import pygame
 import self as self
+from pygame.sprite import Sprite
 
 
-class Ship():
-    def __init__(self,screen, ai_settings):
+class Ship(Sprite):
+    def __init__(self, screen, ai_settings):
+        super().__init__()
         # 初始化飞船并设置初始位置,screen决定了飞船绘制到什么地方
         self.screen = screen
         self.ai_settings = ai_settings
